@@ -6,6 +6,7 @@ import { ToastProviderContext } from "../ToastProvider";
 
 function ToastShelf() {
   const { toasts, dismiss } = React.useContext(ToastProviderContext);
+  console.log('render ToastShelf');
 
   return (
     <ol
@@ -25,4 +26,4 @@ function ToastShelf() {
   );
 }
 
-export default ToastShelf;
+export default React.memo(ToastShelf);

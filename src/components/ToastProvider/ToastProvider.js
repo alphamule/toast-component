@@ -11,7 +11,7 @@ function ToastProvider({ children }) {
     setToasts(filteredToasts);
   };
 
-  useEscapeKey(() => setToasts([]));
+  useEscapeKey(React.useCallback(() => setToasts([]), []));
 
   return (
     <ToastProviderContext.Provider
