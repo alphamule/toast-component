@@ -1,6 +1,7 @@
 import React from "react";
 
 import Button from "../Button";
+import Toast from "../Toast";
 
 import styles from "./ToastPlayground.module.css";
 
@@ -9,11 +10,11 @@ const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 function ToastPlayground() {
   const [message, setMessage] = React.useState("");
   const [selectedVariant, setSelectedVariant] = React.useState("notice");
+  const [showToast, setShowToast] = React.useState(false);
 
   const onSubmit = (event) => {
     event.preventDefault();
-
-    console.info("submit");
+    setShowToast(true);
   };
 
   return (
@@ -22,6 +23,14 @@ function ToastPlayground() {
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
       </header>
+
+      {showToast && (
+        <Toast
+          variant={selectedVariant}
+          content={message}
+          onDismiss={() => setShowToast(false)}
+        />
+      )}
 
       <form className={styles.controlsWrapper} onSubmit={onSubmit}>
         <div className={styles.row}>
