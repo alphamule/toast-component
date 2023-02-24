@@ -1,4 +1,5 @@
 import React from "react";
+import useEscapeKey from "../../hooks/use-escape-key";
 
 export const ToastProviderContext = React.createContext();
 
@@ -10,17 +11,7 @@ function ToastProvider({ children }) {
     setToasts(filteredToasts);
   };
 
-  React.useEffect(() => {
-    const listener = (event) => {
-      if (event.key === "Escape") {
-        setToasts([]);
-      }
-    };
-    document.addEventListener("keydown", listener);
-    return () => {
-      document.removeEventListener("keydown", listener);
-    };
-  }, []);
+  useEscapeKey(() => setToasts([]));
 
   return (
     <ToastProviderContext.Provider
