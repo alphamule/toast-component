@@ -10,12 +10,24 @@ function ToastProvider({ children }) {
     setToasts(filteredToasts);
   };
 
+  React.useEffect(() => {
+    const listener = (event) => {
+      if (event.key === "Escape") {
+        setToasts([]);
+      }
+    };
+    document.addEventListener("keydown", listener);
+    return () => {
+      document.removeEventListener("keydown", listener);
+    };
+  }, []);
+
   return (
     <ToastProviderContext.Provider
       value={{
         toasts,
         setToasts,
-        dismiss
+        dismiss,
       }}
     >
       {children}
