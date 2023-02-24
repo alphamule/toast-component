@@ -12,7 +12,7 @@ const DEFAULT_VARIANT = VARIANT_OPTIONS[0];
 function ToastPlayground() {
   const [message, setMessage] = React.useState("");
   const [selectedVariant, setSelectedVariant] = React.useState(DEFAULT_VARIANT);
-  const { toasts, setToasts } = React.useContext(ToastProviderContext);
+  const { createToast } = React.useContext(ToastProviderContext);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -20,14 +20,11 @@ function ToastPlayground() {
       return;
     }
 
-    setToasts([
-      ...toasts,
-      {
-        id: crypto.randomUUID(),
-        variant: selectedVariant,
-        message: message,
-      },
-    ]);
+    createToast({
+      id: crypto.randomUUID(),
+      variant: selectedVariant,
+      message: message,
+    });
     setMessage("");
     setSelectedVariant(DEFAULT_VARIANT);
   };

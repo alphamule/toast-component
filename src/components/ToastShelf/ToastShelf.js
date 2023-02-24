@@ -6,7 +6,6 @@ import { ToastProviderContext } from "../ToastProvider";
 
 function ToastShelf() {
   const { toasts, dismiss } = React.useContext(ToastProviderContext);
-  console.log('render ToastShelf');
 
   return (
     <ol

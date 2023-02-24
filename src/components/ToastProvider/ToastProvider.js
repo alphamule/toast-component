@@ -11,13 +11,17 @@ function ToastProvider({ children }) {
     setToasts(filteredToasts);
   };
 
+  const createToast = (toast) => {
+    setToasts([...toasts, toast])
+  }
+
   useEscapeKey(React.useCallback(() => setToasts([]), []));
 
   return (
     <ToastProviderContext.Provider
       value={{
         toasts,
-        setToasts,
+        createToast,
         dismiss,
       }}
     >
