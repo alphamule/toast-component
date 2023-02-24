@@ -18,9 +18,9 @@ const ICONS_BY_VARIANT = {
   error: AlertOctagon,
 };
 
-function Toast({ variant = 'notice', onDismiss, children }) {
-  if (! (variant in ICONS_BY_VARIANT)) {
-    throw new Error(`invalid variant: ${variant}`)
+function Toast({ variant = "notice", onDismiss, children }) {
+  if (!(variant in ICONS_BY_VARIANT)) {
+    throw new Error(`invalid variant: ${variant}`);
   }
   const Icon = ICONS_BY_VARIANT[variant] || Info;
 
@@ -29,10 +29,17 @@ function Toast({ variant = 'notice', onDismiss, children }) {
       <div className={styles.iconContainer}>
         <Icon size={24} />
       </div>
-      <p className={styles.content}>{children}</p>
-      <button className={styles.closeButton} onClick={onDismiss}>
+      <p className={styles.content}>
+        <VisuallyHidden>{variant} -</VisuallyHidden>
+        {children}
+      </p>
+      <button
+        className={styles.closeButton}
+        onClick={onDismiss}
+        aria-label="Dismiss message"
+        aria-live="off"
+      >
         <X size={24} />
-        <VisuallyHidden>Dismiss message</VisuallyHidden>
       </button>
     </div>
   );
